@@ -1,0 +1,11 @@
+.colorClass{
+  color: red;
+}
+
+.italicClass{
+  font-style: italic;
+}
+
+.boldClass{
+  font-weight: bold;
+}

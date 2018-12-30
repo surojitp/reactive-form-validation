@@ -1,0 +1,53 @@
+<br><br>
+<app-employee-count *ngIf="employees" [all]="getTotalEmployeesCount()" [male]="getTotalMaleEmployeesCount()" [female]="getTotalFemaleEmployeesCount()"
+  (countRadioButtonSelectionChange)="onEmployeeCountRadioButtonChange($event)">
+</app-employee-count>
+<br><br>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Anul Salary</th>
+      <th>Date Of Birth</th>
+      <th>Index</th>
+      <th>Is First</th>
+      <th>Is Last</th>
+      <th>Even</th>
+      <th>Odd</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let employee of employees;trackBy:tracByEmployeeCode;let i=index;let isFirst=first;let isLast=last; let isEven=even;let isOdd=odd">
+      <tr *ngIf="selectedEmployeeRadioButton=='All' || selectedEmployeeRadioButton==employee.gender">
+        <a [routerLink]="['/employee',employee.code ]">
+          <td>{{employee.code }}</td>
+        </a>
+
+        <td>{{employee.name | uppercase | employeeTitle:employee.gender}}</td>
+        <td>{{employee.gender}}</td>
+        <td>{{employee.anulSalary | currency:'USD':true:'1.2-3'}}</td>
+        <td>{{employee.dateOfBirth | date:'fullDate'}}</td>
+        <td>{{i}}</td>
+        <td>{{isFirst}}</td>
+        <td>{{isLast}}</td>
+        <td>{{isEven}}</td>
+        <td>{{isOdd}}</td>
+        <td><a class="btn btn-sm btn-primary" [routerLink]="['/create',employee.code]">Edit</a></td>
+      </tr>
+    </ng-container>
+
+    <tr *ngIf="!employees">
+      <td colspan="5">{{statusMessage}}</td>
+    </tr>
+
+    <tr *ngIf="employees && employees.length == 0">
+      <td colspan="5">No Employee to Display</td>
+    </tr>
+  </tbody>
+</table>
+
+<button (click)="getEmployees()">Refresh</button>
+<input type="text" [(ngModel)]="color" [style.background]="color">

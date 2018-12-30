@@ -1,0 +1,40 @@
+<table>
+  <thead>
+    <tr>
+        <td attr.colspan="{{columSpan}}">Employee Details</td>
+    </tr>
+     
+  </thead>
+  <tbody *ngIf="empData">
+        <tr>
+          <td>Code</td>
+          <td>{{empData.code}}</td>
+        </tr>
+        <tr>
+          <td>Name</td>
+          <td>{{empData.name}}</td>
+        </tr>
+      
+        <tr>
+          <td>Salary</td>
+          <td>{{empData.anulSalary}}</td>
+        </tr>
+      
+        <tr *ngIf="showDetails">
+          <td>Gender</td>
+          <td>{{empData.gender}}</td>
+        </tr>
+      
+        <tr *ngIf="showDetails">
+          <td>Date Of Birth</td>
+          <td>{{empData.dateOfBirth}}</td>
+        </tr>
+
+  </tbody>
+  
+</table>
+<div *ngIf="!empData">{{statusMessage}}</div>
+
+<button on-click="toggleDetails()" class="btn btn-success">{{showDetails ? 'Hide' : 'Show'}} Details</button>
+
+<button class="btn btn-primary" (click)="onBackButtonClick()">Back</button>
